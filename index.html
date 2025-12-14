@@ -100,9 +100,9 @@
     <nav class="fixed w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/5 top-0 transition-all">
         <div class="max-w-7xl mx-auto pl-8 pr-6 md:pl-20 md:pr-8 h-24 flex items-center justify-between relative">
             
-            <div class="flex-shrink-0 cursor-pointer">
+            <a href="#" class="flex-shrink-0 cursor-pointer hover:opacity-80 transition">
                 <img src="base.svg" alt="BASE PRO Logo" class="h-24 w-auto" width="150" height="96">
-            </div>
+            </a>
 
             <div class="hidden md:flex gap-8 text-sm font-medium text-gray-300 ml-auto mr-8">
                 <a href="#diferenca" class="hover:text-brand-orange transition duration-300">Vantagens</a>
@@ -118,12 +118,12 @@
                 </a>
             </div>
 
-            <div id="mobile-menu-btn" class="md:hidden text-white cursor-pointer ml-auto p-2">
+            <div id="mobile-menu-btn" class="md:hidden text-white cursor-pointer ml-auto p-2 hover:text-brand-orange transition">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </div>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden absolute top-24 left-0 w-full bg-brand-black/95 backdrop-blur-xl border-t border-white/10 shadow-2xl">
+        <div id="mobile-menu" class="md:hidden absolute top-24 left-0 w-full bg-brand-black/95 backdrop-blur-xl border-t border-white/10 shadow-2xl opacity-0 invisible -translate-y-4 transition-all duration-300 ease-in-out origin-top z-40">
             <div class="flex flex-col p-6 gap-6 text-center">
                 <a href="#diferenca" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-medium transition duration-300 py-2 border-b border-white/5">Vantagens</a>
                 <a href="#solucoes" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-medium transition duration-300 py-2 border-b border-white/5">Soluções</a>
@@ -444,7 +444,9 @@
             <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 mb-16 items-start">
                 
                 <div>
-                    <img src="base2.svg" alt="BASE PRO Digital" class="h-20 mb-6 block object-contain object-left -mt-2">
+                    <a href="#" class="inline-block hover:opacity-80 transition">
+                        <img src="base2.svg" alt="BASE PRO Digital" class="h-20 mb-6 block object-contain object-left -mt-2">
+                    </a>
                     
                     <p class="text-gray-400 text-sm leading-relaxed max-w-sm block">
                         Criação de Landing Pages e Sites Institucionais focados em autoridade e conversão. A estrutura profissional que o seu negócio merece.
@@ -492,18 +494,48 @@
     </a>
 
     <script>
-        // Menu Mobile
+        // --- CORREÇÃO DE SCROLL ---
+        // Força o navegador a não lembrar a posição do scroll ao recarregar
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
+        // Garante que ao carregar, se não houver hash na URL, vá para o topo
+        window.addEventListener('load', function() {
+            if(!window.location.hash) {
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // --- MENU MOBILE (COM ANIMAÇÃO) ---
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const links = document.querySelectorAll('.mobile-link');
 
+        // Classes para os estados aberto e fechado
+        const menuOpenClasses = ['opacity-100', 'visible', 'translate-y-0'];
+        const menuClosedClasses = ['opacity-0', 'invisible', '-translate-y-4'];
+
         btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+            // Verifica se está aberto checando uma das classes
+            const isOpen = menu.classList.contains('opacity-100');
+
+            if (isOpen) {
+                // Fechar
+                menu.classList.remove(...menuOpenClasses);
+                menu.classList.add(...menuClosedClasses);
+            } else {
+                // Abrir
+                menu.classList.remove(...menuClosedClasses);
+                menu.classList.add(...menuOpenClasses);
+            }
         });
 
+        // Fecha o menu ao clicar em um link
         links.forEach(link => {
             link.addEventListener('click', () => {
-                menu.classList.add('hidden');
+                menu.classList.remove(...menuOpenClasses);
+                menu.classList.add(...menuClosedClasses);
             });
         });
 
