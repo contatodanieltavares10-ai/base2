@@ -10,6 +10,18 @@
     <link rel="shortcut icon" href="basex.png" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="basex.png">
     
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', function() {
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+                setTimeout(function() { window.scrollTo(0, 0); }, 10);
+            }
+        });
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
@@ -23,7 +35,6 @@
                 extend: {
                     colors: {
                         brand: {
-                            // COR GLOBAL DA MARCA
                             orange: '#FF4200', 
                             black: '#050505',
                             gray: '#121212',
@@ -80,8 +91,6 @@
             color: black !important;
             border-color: white !important;
         }
-
-        /* ANIMAÇÃO DE SCROLL (MANTEIGA / ULTRA SUAVE) */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(40px); 
@@ -133,30 +142,30 @@
         </div>
     </nav>
 
-    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-[110vh] pt-24 overflow-hidden">
+    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-screen pt-24 lg:pt-0 overflow-hidden">
         
-        <div class="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:pl-20 py-12 lg:py-0 z-10 bg-brand-black">
-            <div class="animate-fade-in-up">
-                <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-6">
+        <div class="w-full lg:w-1/2 flex flex-col justify-center items-start px-6 md:px-12 lg:px-16 xl:px-24 2xl:px-40 py-12 lg:py-0 z-10 bg-brand-black">
+            <div class="animate-fade-in-up w-full max-w-2xl mx-auto lg:mx-0">
+                <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight mb-6">
                     Criação de sites e landing pages em <br class="hidden xl:block">
                     <span class="hero-text-gradient">Porto Alegre</span> 
                     e toda a 
                     <span class="hero-text-gradient">Região Sul do Brasil</span>.
                 </h1>
                 
-                <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg border-l-4 border-brand-orange pl-6">
+                <p class="text-gray-400 text-base md:text-lg xl:text-xl leading-relaxed mb-8 max-w-lg border-l-4 border-brand-orange pl-6">
                     Soluções digitais focadas em posicionamento, conversão e escalabilidade para o crescimento do seu negócio.
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#orcamento" class="bg-brand-orange text-white px-6 py-3 rounded-full font-bold text-base hover:bg-orange-600 transition shadow-lg shadow-orange-900/30">
+                    <a href="#orcamento" class="bg-brand-orange text-white px-8 py-4 rounded-full font-bold text-base hover:bg-orange-600 transition shadow-lg shadow-orange-900/30">
                         Ver Planos
                     </a>
                 </div>
             </div>
         </div>
 
-        <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
+        <div class="w-full lg:w-1/2 relative min-h-[500px] lg:h-auto lg:min-h-screen overflow-hidden">
             <img src="IMG.jpg" 
                  alt="Imagem Hero" 
                  class="absolute inset-0 w-full h-full object-cover grayscale">
@@ -502,6 +511,9 @@
         window.addEventListener('load', function() {
             if(!window.location.hash) {
                 window.scrollTo(0, 0);
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 10);
             }
         });
 
