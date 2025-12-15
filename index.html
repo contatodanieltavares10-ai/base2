@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
@@ -10,6 +11,24 @@
     <link rel="shortcut icon" href="basex.png" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="basex.png">
     
+    <script>
+        // Desativa a restauração automática de scroll do navegador
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        
+        // Força o topo imediatamente ao carregar, a menos que haja uma âncora específica na URL
+        window.addEventListener('load', function() {
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+                // Reforço para mobile (alguns browsers demoram renderizar)
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 10);
+            }
+        });
+    </script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
@@ -382,63 +401,6 @@
         </div>
     </section>
 
-    <section id="contato-form" class="py-24 bg-brand-gray relative border-t border-white/5 reveal-on-scroll">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold mb-4 text-white">Vamos Conversar?</h2>
-                <p class="text-gray-400">Preencha o formulário abaixo e entraremos em contato.</p>
-            </div>
-
-            <div class="bg-brand-black p-8 rounded-3xl border border-white/10 shadow-2xl">
-                <form id="contactForm" class="space-y-6">
-                    
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="nome" class="block text-sm font-medium text-gray-400 mb-2">Nome Completo</label>
-                            <input type="text" name="nome" id="nome" required 
-                                class="w-full bg-brand-gray border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange focus:bg-white focus:text-brand-black transition"
-                                placeholder="Seu nome">
-                        </div>
-
-                        <div>
-                            <label for="celular" class="block text-sm font-medium text-gray-400 mb-2">Celular</label>
-                            <input type="tel" name="whatsapp" id="celular" required 
-                                class="w-full bg-brand-gray border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange focus:bg-white focus:text-brand-black transition"
-                                placeholder="(XX) XXXXX-XXXX">
-                        </div>
-                    </div>
-
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-400 mb-2">E-mail</label>
-                            <input type="email" name="email" id="email" required 
-                                class="w-full bg-brand-gray border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange focus:bg-white focus:text-brand-black transition"
-                                placeholder="seu@email.com">
-                        </div>
-
-                        <div>
-                            <label for="cidade" class="block text-sm font-medium text-gray-400 mb-2">Cidade</label>
-                            <input type="text" name="cidade" id="cidade" required 
-                                class="w-full bg-brand-gray border border-white/10 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange focus:bg-white focus:text-brand-black transition"
-                                placeholder="Sua cidade">
-                        </div>
-                    </div>
-
-                    <button type="submit" id="submitBtn"
-                        class="w-full bg-brand-orange text-white font-bold py-4 rounded-xl hover:bg-orange-600 transition duration-300 shadow-lg shadow-orange-900/50 flex justify-center items-center gap-2">
-                        <span>Enviar Solicitação</span>
-                        <svg id="loadingIcon" class="animate-spin h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                    </button>
-                    
-                    <p id="formMessage" class="text-green-500 text-center text-sm mt-4 hidden font-bold">Recebemos seus dados! Entraremos em contato em breve.</p>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <footer id="contato" class="bg-black py-16 border-t border-white/5 text-sm text-gray-400 text-left reveal-on-scroll">
         <div class="max-w-6xl mx-auto px-6">
             <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 mb-16 items-start">
@@ -502,6 +464,9 @@
         window.addEventListener('load', function() {
             if(!window.location.hash) {
                 window.scrollTo(0, 0);
+                setTimeout(function() {
+                    window.scrollTo(0, 0);
+                }, 10);
             }
         });
 
@@ -584,4 +549,3 @@
 
 </body>
 </html>
-
