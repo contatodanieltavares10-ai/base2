@@ -34,12 +34,22 @@
             theme: {
                 extend: {
                     colors: {
+                        // REINVENÇÃO DA PALETA BASEADA NA IMAGEM ENVIADA
                         brand: {
-                            orange: '#FF4200', 
-                            black: '#050505',
-                            gray: '#121212',
+                            // Substituindo o Laranja pelo Roxo Vibrante (Cor #5 da paleta)
+                            orange: '#7B2CBF', 
+                            // Substituindo o Preto pelo Roxo Profundo/Preto (Cor #1 da paleta)
+                            black: '#10002B',
+                            // Substituindo o Cinza pelo Roxo Escuro (Cor #2 da paleta)
+                            gray: '#240046',
+                            // WhatsApp mantém a cor original por usabilidade
                             whatsapp: '#25D366',
                             whatsappHover: '#128C7E'
+                        },
+                        // Mapeando as classes padrão 'orange' para tons de roxo para manter a compatibilidade
+                        orange: {
+                            600: '#5A189A', // Roxo médio (Hover)
+                            700: '#3C096C', // Roxo escuro (Gradiente)
                         }
                     },
                     fontFamily: {
@@ -75,14 +85,15 @@
     </script>
     <style>
         .glass-card {
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(16, 0, 43, 0.7); /* Ajustado para o tom roxo escuro */
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(224, 170, 255, 0.1); /* Borda lilás sutil */
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
         .hero-text-gradient {
-            background: linear-gradient(to right, #FF4200, #ff8c00);
+            /* Gradiente usando as cores mais claras da paleta (Lilás/Roxo Claro) */
+            background: linear-gradient(to right, #9D4EDD, #E0AAFF);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -91,6 +102,8 @@
             color: black !important;
             border-color: white !important;
         }
+
+        /* ANIMAÇÃO DE SCROLL (MANTEIGA / ULTRA SUAVE) */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(40px); 
@@ -158,7 +171,7 @@
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#orcamento" class="bg-brand-orange text-white px-8 py-4 rounded-full font-bold text-base hover:bg-orange-600 transition shadow-lg shadow-orange-900/30">
+                    <a href="#orcamento" class="bg-brand-orange text-white px-8 py-4 rounded-full font-bold text-base hover:bg-orange-600 transition shadow-lg shadow-purple-900/30">
                         Ver Planos
                     </a>
                 </div>
@@ -170,7 +183,7 @@
                  alt="Imagem Hero" 
                  class="absolute inset-0 w-full h-full object-cover grayscale">
             
-            <div class="absolute inset-0 bg-[#FF7F21] mix-blend-multiply opacity-90 z-10"></div>
+            <div class="absolute inset-0 bg-[#7B2CBF] mix-blend-multiply opacity-90 z-10"></div>
 
             <div class="glass-card absolute right-6 md:right-12 top-24 p-5 rounded-2xl max-w-[240px] z-20 animate-float-cycle flex items-center gap-3">
                 <div class="bg-brand-orange/20 p-2 rounded-lg text-brand-orange">
