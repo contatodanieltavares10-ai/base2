@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Base | Criação de Sites em Porto Alegre, SC e PR</title>
+    <title>Studio Dan | Criação de Sites em Porto Alegre, SC e PR</title>
     <meta name="description" content="Criação de sites institucionais em Porto Alegre e Região Sul.">
     
     <link rel="icon" href="basex.png" type="image/png">
@@ -407,7 +407,7 @@
                 </div>
                 <div class="p-8 rounded-lg bg-brand-surface border border-white/5 hover:border-brand-orange transition duration-300 group reveal-on-scroll hover:shadow-[0_0_20px_rgba(255,85,0,0.15)]" style="transition-delay: 200ms;">
                     <div class="w-12 h-12 bg-white/5 rounded-md flex items-center justify-center mb-6 group-hover:bg-brand-orange group-hover:text-black transition-colors duration-300 text-brand-orange border border-white/10">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138z"></path></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
                     </div>
                     <h3 class="font-bold text-white mb-2 text-lg font-display">Autoridade Digital</h3>
                     <p class="text-sm text-gray-500 leading-relaxed">Um site profissional posiciona você como referência, aumenta a confiança imediata e faz seu negócio ser levado a sério.</p>
@@ -481,7 +481,7 @@
                     <div class="dot"></div>
                     <div class="dot"></div>
                     <div class="dot"></div>
-                    </div>
+                </div>
             </div>
 
         </div>
@@ -504,7 +504,7 @@
                     <h3 class="text-gray-500 font-bold text-xs tracking-widest uppercase mb-4 font-mono">Plano 1</h3>
                     <div class="text-3xl font-extrabold mb-4 text-white font-display">Landing Page</div>
                     <p class="text-gray-400 text-sm mb-6 flex-grow">Pensado para quem quer comunicar um serviço específico com precisão.</p>
-                    <div class="text-4xl font-extrabold mb-8 text-brand-orange">R$ 600</div>
+                    <div class="text-4xl font-extrabold mb-8 text-white">R$ 600</div>
                     <div class="space-y-6 mb-8 border-t border-white/5 pt-6">
                         <div>
                             <span class="block text-white font-bold text-sm mb-2 font-mono uppercase">O que está incluso:</span>
@@ -585,7 +585,7 @@
             <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 mb-16 items-start">
                 <div>
                     <a href="#" class="inline-block hover:opacity-80 transition">
-                        <img src="Tavares1.svg" alt="Tavares Digital" class="h-24 mb-6 block object-contain object-left -mt-2 grayscale hover:grayscale-0 transition duration-300">
+                        <img src="Dan.svg" alt="Studio Dan Logo" class="h-12 w-auto logo-white-filter block object-contain object-left -mt-2 grayscale hover:grayscale-0 transition duration-300">
                     </a>
                     <p class="text-gray-500 text-sm leading-relaxed max-w-sm block">Criação de Landing Pages e Sites Institucionais focados em autoridade e conversão.</p>
                 </div>
@@ -607,7 +607,7 @@
                 </div>
             </div>
             <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600 font-mono">
-                <p>&copy; 2025 BASE PRO Digital. Todos os direitos reservados.</p>
+                <p>&copy; 2025 Studio Dan. Todos os direitos reservados.</p>
                 <p>Designed for Performance.</p>
             </div>
         </div>
@@ -660,13 +660,15 @@
             });
 
             // Atualiza as bolinhas
-            dots.forEach((dot, index) => {
-                if (index === activeIndex) {
-                    dot.classList.add('active');
-                } else {
-                    dot.classList.remove('active');
-                }
-            });
+            if(dots.length > 0) {
+                dots.forEach((dot, index) => {
+                    if (index === activeIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
         }
 
         updateGallery();
@@ -676,7 +678,9 @@
             updateGallery();
         }, 5000);
 
+        // Formulário App Script
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwXI5ie9KxwwSsnGoHiMXDmCqtmB_aJ6tZh_XnGPA8lmgQPM0WHnUnWi0JebiBORbnxKw/exec';
+        
         const form = document.forms['contactForm'];
         const btnSubmit = document.getElementById('submitBtn');
         const btnText = btnSubmit.querySelector('span');
@@ -685,6 +689,7 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
+            
             btnSubmit.disabled = true;
             btnSubmit.classList.add('opacity-75', 'cursor-not-allowed');
             btnText.textContent = 'Enviando...';
@@ -711,9 +716,12 @@
                 });
         });
 
+        // Intersection Observer para animação ao rolar
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) { entry.target.classList.add('reveal-visible'); }
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                }
             });
         }, { threshold: 0.1 });
 
