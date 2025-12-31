@@ -12,8 +12,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
-
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
@@ -29,22 +28,11 @@
                             surface: '#1E1E1E', 
                             whatsapp: '#25D366',
                             whatsappHover: '#128C7E'
-                        },
-                        orange: {
-                            500: '#FF5500', 
-                            600: '#E04800', 
-                            700: '#B83A00', 
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
-                    },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #202020 1px, transparent 1px), linear-gradient(to bottom, #202020 1px, transparent 1px)",
-                    },
-                    backgroundSize: {
-                        'grid-size': '40px 40px',
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -74,9 +62,27 @@
             }
         }
     </script>
+
     <style>
+        /* CSS PURO PARA GARANTIR QUE NÃO FALHE */
+        
+        body {
+            background-color: #050505; /* Garante fundo preto se tudo falhar */
+            color: #e5e7eb;
+        }
+
         .logo-white-filter {
             filter: brightness(0) invert(1);
+        }
+
+        /* TEXTURA QUADRICULADA (GRID) - Feita em CSS puro agora */
+        .bg-grid-custom {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(50, 50, 50, 0.5) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(50, 50, 50, 0.5) 1px, transparent 1px);
+            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
         .tech-card {
@@ -96,12 +102,8 @@
             background: linear-gradient(to right, #FF5500, #FFA500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            /* Fallback para cor sólida se o gradiente falhar */
+            color: #FF5500; 
         }
 
         input:not(:placeholder-shown) {
@@ -110,7 +112,6 @@
             border-color: #FF5500 !important;
         }
 
-        /* OTIMIZAÇÃO: Fallback se o JS falhar */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px); 
@@ -120,11 +121,6 @@
         .reveal-visible {
             opacity: 1;
             transform: translateY(0);
-        }
-        /* Se o usuário tiver JS desabilitado ou der erro, mostra tudo */
-        .no-js .reveal-on-scroll {
-            opacity: 1 !important;
-            transform: none !important;
         }
 
         /* --- CARROSSEL MAC WINDOW STYLE --- */
@@ -248,15 +244,26 @@
             }
         }
     </style>
-    <script>document.documentElement.classList.remove("no-js");</script>
+    
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', function() {
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+                setTimeout(function() { window.scrollTo(0, 0); }, 10);
+            }
+        });
+    </script>
 </head>
-<body class="bg-brand-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-orange selection:text-white no-js">
+<body class="bg-brand-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-orange selection:text-white">
 
     <nav class="absolute w-full z-50 bg-brand-black border-b border-white/5 top-0 transition-all">
         <div class="max-w-7xl mx-auto pl-8 pr-6 md:pl-20 md:pr-8 h-24 flex items-center justify-between relative">
             
             <a href="#" class="flex-shrink-0 cursor-pointer hover:opacity-80 transition flex items-center h-full relative z-50">
-                <img src="Dan.svg" alt="Dan Logo" class="h-14 w-auto logo-white-filter object-contain" width="150" height="56">
+                <img src="Dan.svg" alt="Dan Logo" class="h-14 w-auto logo-white-filter object-contain">
             </a>
 
             <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-gray-400 ml-auto mr-8 uppercase font-display">
@@ -290,7 +297,7 @@
         </div>
     </nav>
 
-    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-[110vh] pt-24 overflow-hidden bg-brand-black bg-grid">
+    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-[110vh] pt-24 overflow-hidden bg-brand-black bg-grid-custom">
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:pl-20 py-12 lg:py-0 z-10">
             <div class="animate-fade-in-up">
                 <h1 class="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight mb-6 font-display tracking-tight">
@@ -313,9 +320,9 @@
         </div>
 
         <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
-            <img src="IMG.jpg" alt="Imagem Hero" loading="eager" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
-            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-black z-10"></div>
+            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-black z-10"></div>
 
             <div class="tech-card absolute right-6 md:right-12 top-24 p-5 rounded-lg max-w-[240px] z-20 animate-float-cycle flex items-center gap-3">
                 <div class="bg-brand-orange/10 p-2 rounded text-brand-orange border border-brand-orange/20">
@@ -339,7 +346,7 @@
         </div>
     </header>
 
-    <section id="diferenca" class="py-24 relative overflow-hidden bg-brand-gray bg-grid border-y border-white/5">
+    <section id="diferenca" class="py-24 relative overflow-hidden bg-brand-gray bg-grid-custom border-y border-white/5">
         <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal-on-scroll">
                 <h2 class="text-3xl font-bold mb-4 font-display text-white">A Evolução da sua Presença Digital</h2>
@@ -415,7 +422,7 @@
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 bg-brand-gray bg-grid relative overflow-hidden border-t border-white/5">
+    <section id="portfolio" class="py-24 bg-brand-gray bg-grid-custom relative overflow-hidden border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
             
             <div class="mb-2 reveal-on-scroll">
@@ -553,7 +560,7 @@
         </div>
     </section>
 
-    <section id="sobre" class="py-24 bg-brand-black relative overflow-hidden border-t border-white/5 bg-grid">
+    <section id="sobre" class="py-24 bg-brand-black relative overflow-hidden border-t border-white/5 bg-grid-custom">
         <div class="max-w-5xl mx-auto px-6 relative z-10">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 
@@ -690,11 +697,14 @@
         let timer;
 
         function updateGallery() {
+            // Limpa timer anterior para evitar conflitos
             if(timer) clearTimeout(timer);
 
             galleryItems.forEach((item, index) => {
+                // Remove classes antigas
                 item.classList.remove('active', 'prev', 'next', 'hidden-item');
                 
+                // Lógica de posicionamento (CSS)
                 if (index === activeIndex) {
                     item.classList.add('active');
                 } else if (index === (activeIndex - 1 + galleryItems.length) % galleryItems.length) {
@@ -709,17 +719,21 @@
                 const video = item.querySelector('video');
                 if (video) {
                     if (index === activeIndex) {
-                        video.currentTime = 0; 
+                        video.currentTime = 0; // Reinicia o vídeo
                         video.play().catch(e => console.log("Auto-play prevented"));
-                        video.loop = false;
-                        video.onended = () => { nextSlide(); };
+                        video.loop = false; // Garante que não está em loop
+                        // Quando o vídeo acabar, chama o próximo slide
+                        video.onended = () => {
+                            nextSlide();
+                        };
                     } else {
                         video.pause();
-                        video.onended = null; 
+                        video.onended = null; // Remove o listener quando não está ativo
                     }
                 }
             });
 
+            // Atualiza as bolinhas
             if(dots.length > 0) {
                 dots.forEach((dot, index) => {
                     if (index === activeIndex) {
@@ -730,12 +744,14 @@
                 });
             }
 
+            // Lógica do Timer: Só ativa o setTimeout se o slide ATUAL NÃO for um vídeo
             const currentItem = galleryItems[activeIndex];
             const currentVideo = currentItem.querySelector('video');
 
             if (!currentVideo) {
-                timer = setTimeout(nextSlide, 5000); 
+                timer = setTimeout(nextSlide, 5000); // 5 segundos para imagens
             }
+            // Se for vídeo, o 'video.onended' acima cuidará da transição
         }
 
         function nextSlide() {
@@ -743,7 +759,9 @@
             updateGallery();
         }
 
+        // Inicia a galeria
         updateGallery();
+
 
         // Formulário App Script
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxvGXWzpDPVHRoGn-c941eQD6orWRwWaSVD23u-_WldKGizoABnAkgVBamjPQENNnCd/exec';
@@ -756,6 +774,7 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
+            
             btnSubmit.disabled = true;
             btnSubmit.classList.add('opacity-75', 'cursor-not-allowed');
             btnText.textContent = 'Enviando...';
