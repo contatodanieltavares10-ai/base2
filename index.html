@@ -52,6 +52,12 @@
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
                     },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #202020 1px, transparent 1px), linear-gradient(to bottom, #202020 1px, transparent 1px)",
+                    },
+                    backgroundSize: {
+                        'grid-size': '40px 40px',
+                    },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'float-cycle': 'floatCycle 14s ease-in-out infinite',
@@ -104,12 +110,10 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* --- UPDATE: Grid estilo Blueprint (Planta Técnica) --- */
         .bg-grid {
             background-size: 40px 40px;
-            /* Linhas cinzas finas e sutis */
-            background-image: linear-gradient(to right, rgba(128, 128, 128, 0.08) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(128, 128, 128, 0.08) 1px, transparent 1px);
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
 
         input:not(:placeholder-shown) {
@@ -128,134 +132,6 @@
             opacity: 1;
             transform: translateY(0);
         }
-
-        /* --- UPDATE: Máscara para imagem do Hero desaparecer na esquerda --- */
-        .hero-image-mask {
-            /* O gradiente vai da esquerda (transparente) para a direita (opaco) */
-            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%, black 100%);
-            mask-image: linear-gradient(to right, transparent 0%, black 50%, black 100%);
-        }
-
-        /* --- CARROSSEL MAC WINDOW STYLE --- */
-        .carousel-wrapper {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1200px;
-        }
-
-        .mac-window {
-            position: absolute;
-            width: 600px;
-            height: 300px;
-            background-color: #1a1a1a;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
-            border: 1px solid #333;
-            transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .window-bar {
-            height: 32px;
-            background: #252525;
-            display: flex;
-            align-items: center;
-            padding: 0 12px;
-            gap: 8px;
-            border-bottom: 1px solid #333;
-            flex-shrink: 0;
-            z-index: 10;
-        }
-
-        .win-btn { width: 12px; height: 12px; border-radius: 50%; }
-        .btn-close { background-color: #ff5f56; }
-        .btn-min { background-color: #ffbd2e; }
-        .btn-max { background-color: #27c93f; }
-
-        .window-body {
-            flex: 1;
-            position: relative;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .window-body img,
-        .window-body video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-            display: block;
-        }
-
-        .mac-window.active {
-            z-index: 30;
-            transform: translateX(0) scale(1);
-            opacity: 1;
-            filter: blur(0);
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .mac-window.prev {
-            z-index: 10;
-            transform: translateX(-60%) scale(0.8) rotateY(15deg);
-            opacity: 0.5;
-            filter: blur(2px);
-        }
-
-        .mac-window.next {
-            z-index: 10;
-            transform: translateX(60%) scale(0.8) rotateY(-15deg);
-            opacity: 0.5;
-            filter: blur(2px);
-        }
-
-        .mac-window.hidden-item {
-            z-index: 0;
-            transform: scale(0);
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 40;
-        }
-
-        .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #333;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background-color: #FF5500;
-            transform: scale(1.3);
-            box-shadow: 0 0 8px rgba(255, 85, 0, 0.6);
-        }
-
-        @media (max-width: 768px) {
-            .mac-window {
-                width: 320px !important;
-                height: 200px !important;
-            }
-            .carousel-wrapper {
-                height: 320px;
-            }
-        }
     </style>
 </head>
 <body class="bg-brand-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-orange selection:text-white">
@@ -270,7 +146,6 @@
             <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-gray-400 ml-auto mr-8 uppercase font-display">
                 <a href="#diferenca" class="hover:text-brand-orange transition duration-300">Vantagens</a>
                 <a href="#solucoes" class="hover:text-brand-orange transition duration-300">Soluções</a>
-                <a href="#portfolio" class="hover:text-brand-orange transition duration-300">Portfólio</a>
                 <a href="#orcamento" class="hover:text-brand-orange transition duration-300">Investimento</a>
                 <a href="#contato" class="hover:text-brand-orange transition duration-300">Contato</a>
             </div>
@@ -291,7 +166,6 @@
             <div class="flex flex-col p-6 gap-6 text-center">
                 <a href="#diferenca" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-bold uppercase tracking-widest transition duration-300 py-2 border-b border-white/5">Vantagens</a>
                 <a href="#solucoes" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-bold uppercase tracking-widest transition duration-300 py-2 border-b border-white/5">Soluções</a>
-                <a href="#portfolio" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-bold uppercase tracking-widest transition duration-300 py-2 border-b border-white/5">Portfólio</a>
                 <a href="#orcamento" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-bold uppercase tracking-widest transition duration-300 py-2 border-b border-white/5">Investimento</a>
                 <a href="https://wa.me/seunumero" class="mobile-link text-lg text-brand-whatsapp font-bold py-2 border border-brand-whatsapp/30 rounded-lg">Falar no WhatsApp</a>
             </div>
@@ -313,7 +187,7 @@
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#orcamento" class="bg-brand-orange text-black px-8 py-3 rounded-sm font-bold text-base hover:bg-white hover:text-brand-orange transition-all duration-300 uppercase tracking-wide hover:scale-105 hover:shadow-[0_0_20px_rgba(255,85,0,0.4)]">
+                    <a href="#orcamento" class="bg-brand-orange text-black px-8 py-3 rounded-sm font-bold text-base hover:bg-white hover:text-brand-orange transition-all duration-300 uppercase tracking-wide">
                         Ver Planos
                     </a>
                 </div>
@@ -321,8 +195,10 @@
         </div>
 
         <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
-            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale hero-image-mask z-0">
-            
+            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-black z-10"></div>
+
             <div class="tech-card absolute right-6 md:right-12 top-24 p-5 rounded-lg max-w-[240px] z-20 animate-float-cycle flex items-center gap-3">
                 <div class="bg-brand-orange/10 p-2 rounded text-brand-orange border border-brand-orange/20">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -421,89 +297,6 @@
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 bg-brand-gray bg-grid relative overflow-hidden border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
-            
-            <div class="mb-2 reveal-on-scroll">
-                <h2 class="text-3xl md:text-4xl font-extrabold mb-4 font-display text-white">
-                    Meus Projetos
-                </h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto md:mt-2">
-                    Projetos construídos com HTML, CSS e JavaScript, unindo design refinado e alta performance.
-                </p>
-            </div>
-
-            <div class="reveal-on-scroll" style="transition-delay: 200ms;">
-                <div class="carousel-wrapper">
-                    
-                    <div class="mac-window">
-                        <div class="window-bar">
-                            <div class="win-btn btn-close"></div>
-                            <div class="win-btn btn-min"></div>
-                            <div class="win-btn btn-max"></div>
-                        </div>
-                        <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
-                                <source src="volume.mp4" type="video/mp4">
-                                Seu navegador não suporta vídeos.
-                            </video>
-                        </div>
-                    </div>
-
-                    <div class="mac-window">
-                        <div class="window-bar">
-                            <div class="win-btn btn-close"></div>
-                            <div class="win-btn btn-min"></div>
-                            <div class="win-btn btn-max"></div>
-                        </div>
-                        <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
-                                <source src="volume2.mp4" type="video/mp4">
-                                Seu navegador não suporta vídeos.
-                            </video>
-                        </div>
-                    </div>
-                    
-                    <div class="mac-window">
-                        <div class="window-bar">
-                            <div class="win-btn btn-close"></div>
-                            <div class="win-btn btn-min"></div>
-                            <div class="win-btn btn-max"></div>
-                        </div>
-                        <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
-                                <source src="volume3.mp4" type="video/mp4">
-                                Seu navegador não suporta vídeos.
-                            </video>
-                        </div>
-                    </div>
-                    
-                      <div class="mac-window">
-                        <div class="window-bar">
-                            <div class="win-btn btn-close"></div>
-                            <div class="win-btn btn-min"></div>
-                            <div class="win-btn btn-max"></div>
-                        </div>
-                        <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
-                                <source src="volume4.mp4" type="video/mp4">
-                                Seu navegador não suporta vídeos.
-                            </video>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="carousel-dots">
-                    <div class="dot active"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                    <div class="dot"></div>
-                </div>
-            </div>
-
-        </div>
-    </section>
-
     <section id="orcamento" class="py-24 bg-brand-surface relative overflow-hidden border-t border-white/5">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>
         <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-brand-orange/5 to-transparent"></div>
@@ -533,7 +326,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Landing%20Page" target="_blank" class="w-full block text-center border border-white/20 text-white font-bold py-4 rounded-sm hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">Selecionar Plano</a>
+                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Landing%20Page" target="_blank" class="w-full block text-center border border-white/20 text-white font-bold py-4 rounded-sm hover:bg-white hover:text-black transition duration-300 uppercase tracking-widest text-sm">Selecionar Plano</a>
                 </div>
 
                 <div class="bg-brand-black border border-brand-orange rounded-lg p-8 flex flex-col relative shadow-[0_0_40px_-10px_rgba(255,85,0,0.2)] reveal-on-scroll scale-105 z-10" style="transition-delay: 200ms;">
@@ -553,7 +346,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Site%20Institucional" target="_blank" class="w-full block text-center bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm hover:scale-105 hover:shadow-[0_0_20px_rgba(255,85,0,0.4)]">Quero este Plano</a>
+                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Site%20Institucional" target="_blank" class="w-full block text-center bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white hover:text-black transition duration-300 uppercase tracking-widest text-sm">Quero este Plano</a>
                 </div>
             </div>
         </div>
@@ -620,7 +413,7 @@
                             <input type="text" name="cidade" id="cidade" required class="w-full bg-brand-black border border-white/10 rounded-sm px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition" placeholder="Sua cidade">
                         </div>
                     </div>
-                    <button type="submit" id="submitBtn" class="w-full bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white transition-all duration-300 shadow-lg shadow-brand-orange/20 flex justify-center items-center gap-2 uppercase tracking-widest text-sm hover:scale-105 hover:shadow-[0_0_20px_rgba(255,85,0,0.4)]">
+                    <button type="submit" id="submitBtn" class="w-full bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white transition duration-300 shadow-lg shadow-brand-orange/20 flex justify-center items-center gap-2 uppercase tracking-widest text-sm">
                         <span>Enviar Solicitação</span>
                         <svg id="loadingIcon" class="animate-spin h-5 w-5 text-black hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
@@ -688,79 +481,6 @@
         links.forEach(link => {
             link.addEventListener('click', () => { menu.classList.remove(...menuOpenClasses); menu.classList.add(...menuClosedClasses); });
         });
-
-        // --- CARROSSEL 3D COVERFLOW LÓGICA E BOLINHAS ---
-        const galleryItems = document.querySelectorAll('.mac-window');
-        const dots = document.querySelectorAll('.dot');
-        let activeIndex = 2; // Começa no item do meio
-        let timer;
-
-        function updateGallery() {
-            // Limpa timer anterior para evitar conflitos
-            if(timer) clearTimeout(timer);
-
-            galleryItems.forEach((item, index) => {
-                // Remove classes antigas
-                item.classList.remove('active', 'prev', 'next', 'hidden-item');
-                
-                // Lógica de posicionamento (CSS)
-                if (index === activeIndex) {
-                    item.classList.add('active');
-                } else if (index === (activeIndex - 1 + galleryItems.length) % galleryItems.length) {
-                    item.classList.add('prev');
-                } else if (index === (activeIndex + 1) % galleryItems.length) {
-                    item.classList.add('next');
-                } else {
-                    item.classList.add('hidden-item');
-                }
-
-                // Lógica do Vídeo (Play/Pause/Reset)
-                const video = item.querySelector('video');
-                if (video) {
-                    if (index === activeIndex) {
-                        video.currentTime = 0; // Reinicia o vídeo
-                        video.play().catch(e => console.log("Auto-play prevented"));
-                        video.loop = false; // Garante que não está em loop
-                        // Quando o vídeo acabar, chama o próximo slide
-                        video.onended = () => {
-                            nextSlide();
-                        };
-                    } else {
-                        video.pause();
-                        video.onended = null; // Remove o listener quando não está ativo
-                    }
-                }
-            });
-
-            // Atualiza as bolinhas
-            if(dots.length > 0) {
-                dots.forEach((dot, index) => {
-                    if (index === activeIndex) {
-                        dot.classList.add('active');
-                    } else {
-                        dot.classList.remove('active');
-                    }
-                });
-            }
-
-            // Lógica do Timer: Só ativa o setTimeout se o slide ATUAL NÃO for um vídeo
-            const currentItem = galleryItems[activeIndex];
-            const currentVideo = currentItem.querySelector('video');
-
-            if (!currentVideo) {
-                timer = setTimeout(nextSlide, 5000); // 5 segundos para imagens
-            }
-            // Se for vídeo, o 'video.onended' acima cuidará da transição
-        }
-
-        function nextSlide() {
-            activeIndex = (activeIndex + 1) % galleryItems.length;
-            updateGallery();
-        }
-
-        // Inicia a galeria
-        updateGallery();
-
 
         // Formulário App Script
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxvGXWzpDPVHRoGn-c941eQD6orWRwWaSVD23u-_WldKGizoABnAkgVBamjPQENNnCd/exec';
