@@ -10,9 +10,22 @@
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
     
+    <script>
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', function() {
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+                setTimeout(function() { window.scrollTo(0, 0); }, 10);
+            }
+        });
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
@@ -28,11 +41,22 @@
                             surface: '#1E1E1E', 
                             whatsapp: '#25D366',
                             whatsappHover: '#128C7E'
+                        },
+                        orange: {
+                            500: '#FF5500', 
+                            600: '#E04800', 
+                            700: '#B83A00', 
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'grid-pattern': "linear-gradient(to right, #202020 1px, transparent 1px), linear-gradient(to bottom, #202020 1px, transparent 1px)",
+                    },
+                    backgroundSize: {
+                        'grid-size': '40px 40px',
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
@@ -62,27 +86,9 @@
             }
         }
     </script>
-
     <style>
-        /* CSS PURO PARA GARANTIR QUE NÃO FALHE */
-        
-        body {
-            background-color: #050505; /* Garante fundo preto se tudo falhar */
-            color: #e5e7eb;
-        }
-
         .logo-white-filter {
             filter: brightness(0) invert(1);
-        }
-
-        /* TEXTURA QUADRICULADA (GRID) - Feita em CSS puro agora */
-        .bg-grid-custom {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(50, 50, 50, 0.5) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(50, 50, 50, 0.5) 1px, transparent 1px);
-            mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
         }
 
         .tech-card {
@@ -102,8 +108,12 @@
             background: linear-gradient(to right, #FF5500, #FFA500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            /* Fallback para cor sólida se o gradiente falhar */
-            color: #FF5500; 
+        }
+
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
 
         input:not(:placeholder-shown) {
@@ -137,6 +147,7 @@
         .mac-window {
             position: absolute;
             width: 600px;
+            /* ALTURA FIXA PARA CORTAR TARJAS (Ajuste do vídeo) */
             height: 300px;
             background-color: #1a1a1a;
             border-radius: 12px;
@@ -172,6 +183,7 @@
             background: #000;
         }
 
+        /* Video e Imagem preenchendo e cortando excessos */
         .window-body img,
         .window-body video {
             width: 100%;
@@ -210,6 +222,7 @@
             pointer-events: none;
         }
 
+        /* --- BOLINHAS (INDICADORES) --- */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -237,25 +250,13 @@
         @media (max-width: 768px) {
             .mac-window {
                 width: 320px !important;
-                height: 200px !important; 
+                height: 200px !important; /* Ajuste proporcional mobile */
             }
             .carousel-wrapper {
                 height: 320px;
             }
         }
     </style>
-    
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.addEventListener('load', function() {
-            if (!window.location.hash) {
-                window.scrollTo(0, 0);
-                setTimeout(function() { window.scrollTo(0, 0); }, 10);
-            }
-        });
-    </script>
 </head>
 <body class="bg-brand-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-orange selection:text-white">
 
@@ -297,7 +298,7 @@
         </div>
     </nav>
 
-    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-[110vh] pt-24 overflow-hidden bg-brand-black bg-grid-custom">
+    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-[110vh] pt-24 overflow-hidden bg-brand-black bg-grid">
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:pl-20 py-12 lg:py-0 z-10">
             <div class="animate-fade-in-up">
                 <h1 class="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight mb-6 font-display tracking-tight">
@@ -321,8 +322,8 @@
 
         <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
             <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
-            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-black z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-black z-10"></div>
 
             <div class="tech-card absolute right-6 md:right-12 top-24 p-5 rounded-lg max-w-[240px] z-20 animate-float-cycle flex items-center gap-3">
                 <div class="bg-brand-orange/10 p-2 rounded text-brand-orange border border-brand-orange/20">
@@ -346,7 +347,7 @@
         </div>
     </header>
 
-    <section id="diferenca" class="py-24 relative overflow-hidden bg-brand-gray bg-grid-custom border-y border-white/5">
+    <section id="diferenca" class="py-24 relative overflow-hidden bg-brand-gray bg-grid border-y border-white/5">
         <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal-on-scroll">
                 <h2 class="text-3xl font-bold mb-4 font-display text-white">A Evolução da sua Presença Digital</h2>
@@ -422,7 +423,7 @@
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 bg-brand-gray bg-grid-custom relative overflow-hidden border-t border-white/5">
+    <section id="portfolio" class="py-24 bg-brand-gray bg-grid relative overflow-hidden border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
             
             <div class="mb-2 reveal-on-scroll">
@@ -444,7 +445,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
+                            <video muted playsinline class="w-full h-full object-cover object-top">
                                 <source src="volume.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -458,7 +459,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
+                            <video muted playsinline class="w-full h-full object-cover object-top">
                                 <source src="volume2.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -472,7 +473,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
+                            <video muted playsinline class="w-full h-full object-cover object-top">
                                 <source src="volume3.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -486,7 +487,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
+                            <video muted playsinline class="w-full h-full object-cover object-top">
                                 <source src="volume4.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -560,7 +561,7 @@
         </div>
     </section>
 
-    <section id="sobre" class="py-24 bg-brand-black relative overflow-hidden border-t border-white/5 bg-grid-custom">
+    <section id="sobre" class="py-24 bg-brand-black relative overflow-hidden border-t border-white/5 bg-grid">
         <div class="max-w-5xl mx-auto px-6 relative z-10">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 
@@ -585,7 +586,7 @@
                       <div class="relative group">
                         <div class="absolute -inset-4 bg-brand-orange/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                         <div class="relative w-64 h-64 rounded-2xl overflow-hidden border-2 border-white/10 group-hover:border-brand-orange/50 transition-all duration-500 shadow-2xl ring-1 ring-white/5 group-hover:ring-brand-orange/30 hover:scale-105">
-                            <img src="daniel.png" loading="lazy" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                            <img src="daniel.png" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
                         </div>
                     </div>
                 </div>
@@ -802,11 +803,6 @@
         });
 
         // Intersection Observer para animação ao rolar
-        // OTIMIZAÇÃO: Timeout de segurança para forçar exibição se o JS falhar ou demorar
-        setTimeout(() => {
-             document.querySelectorAll('.reveal-on-scroll').forEach((el) => el.classList.add('reveal-visible'));
-        }, 2000); // Se em 2s não aparecer, força aparecer.
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
