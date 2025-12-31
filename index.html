@@ -10,18 +10,6 @@
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
     
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.addEventListener('load', function() {
-            if (!window.location.hash) {
-                window.scrollTo(0, 0);
-                setTimeout(function() { window.scrollTo(0, 0); }, 10);
-            }
-        });
-    </script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
@@ -122,6 +110,7 @@
             border-color: #FF5500 !important;
         }
 
+        /* OTIMIZAÇÃO: Fallback se o JS falhar */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px); 
@@ -131,6 +120,11 @@
         .reveal-visible {
             opacity: 1;
             transform: translateY(0);
+        }
+        /* Se o usuário tiver JS desabilitado ou der erro, mostra tudo */
+        .no-js .reveal-on-scroll {
+            opacity: 1 !important;
+            transform: none !important;
         }
 
         /* --- CARROSSEL MAC WINDOW STYLE --- */
@@ -147,7 +141,6 @@
         .mac-window {
             position: absolute;
             width: 600px;
-            /* ALTURA FIXA PARA CORTAR TARJAS (Ajuste do vídeo) */
             height: 300px;
             background-color: #1a1a1a;
             border-radius: 12px;
@@ -183,7 +176,6 @@
             background: #000;
         }
 
-        /* Video e Imagem preenchendo e cortando excessos */
         .window-body img,
         .window-body video {
             width: 100%;
@@ -222,7 +214,6 @@
             pointer-events: none;
         }
 
-        /* --- BOLINHAS (INDICADORES) --- */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -250,21 +241,22 @@
         @media (max-width: 768px) {
             .mac-window {
                 width: 320px !important;
-                height: 200px !important; /* Ajuste proporcional mobile */
+                height: 200px !important; 
             }
             .carousel-wrapper {
                 height: 320px;
             }
         }
     </style>
+    <script>document.documentElement.classList.remove("no-js");</script>
 </head>
-<body class="bg-brand-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-orange selection:text-white">
+<body class="bg-brand-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-orange selection:text-white no-js">
 
     <nav class="absolute w-full z-50 bg-brand-black border-b border-white/5 top-0 transition-all">
         <div class="max-w-7xl mx-auto pl-8 pr-6 md:pl-20 md:pr-8 h-24 flex items-center justify-between relative">
             
             <a href="#" class="flex-shrink-0 cursor-pointer hover:opacity-80 transition flex items-center h-full relative z-50">
-                <img src="Dan.svg" alt="Dan Logo" class="h-14 w-auto logo-white-filter object-contain">
+                <img src="Dan.svg" alt="Dan Logo" class="h-14 w-auto logo-white-filter object-contain" width="150" height="56">
             </a>
 
             <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-gray-400 ml-auto mr-8 uppercase font-display">
@@ -321,7 +313,7 @@
         </div>
 
         <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
-            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
+            <img src="IMG.jpg" alt="Imagem Hero" loading="eager" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
             <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
             <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-black z-10"></div>
 
@@ -445,7 +437,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -459,7 +451,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume2.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -473,7 +465,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume3.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -487,7 +479,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume4.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -586,7 +578,7 @@
                       <div class="relative group">
                         <div class="absolute -inset-4 bg-brand-orange/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                         <div class="relative w-64 h-64 rounded-2xl overflow-hidden border-2 border-white/10 group-hover:border-brand-orange/50 transition-all duration-500 shadow-2xl ring-1 ring-white/5 group-hover:ring-brand-orange/30 hover:scale-105">
-                            <img src="daniel.png" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                            <img src="daniel.png" loading="lazy" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
                         </div>
                     </div>
                 </div>
@@ -698,14 +690,11 @@
         let timer;
 
         function updateGallery() {
-            // Limpa timer anterior para evitar conflitos
             if(timer) clearTimeout(timer);
 
             galleryItems.forEach((item, index) => {
-                // Remove classes antigas
                 item.classList.remove('active', 'prev', 'next', 'hidden-item');
                 
-                // Lógica de posicionamento (CSS)
                 if (index === activeIndex) {
                     item.classList.add('active');
                 } else if (index === (activeIndex - 1 + galleryItems.length) % galleryItems.length) {
@@ -720,21 +709,17 @@
                 const video = item.querySelector('video');
                 if (video) {
                     if (index === activeIndex) {
-                        video.currentTime = 0; // Reinicia o vídeo
+                        video.currentTime = 0; 
                         video.play().catch(e => console.log("Auto-play prevented"));
-                        video.loop = false; // Garante que não está em loop
-                        // Quando o vídeo acabar, chama o próximo slide
-                        video.onended = () => {
-                            nextSlide();
-                        };
+                        video.loop = false;
+                        video.onended = () => { nextSlide(); };
                     } else {
                         video.pause();
-                        video.onended = null; // Remove o listener quando não está ativo
+                        video.onended = null; 
                     }
                 }
             });
 
-            // Atualiza as bolinhas
             if(dots.length > 0) {
                 dots.forEach((dot, index) => {
                     if (index === activeIndex) {
@@ -745,14 +730,12 @@
                 });
             }
 
-            // Lógica do Timer: Só ativa o setTimeout se o slide ATUAL NÃO for um vídeo
             const currentItem = galleryItems[activeIndex];
             const currentVideo = currentItem.querySelector('video');
 
             if (!currentVideo) {
-                timer = setTimeout(nextSlide, 5000); // 5 segundos para imagens
+                timer = setTimeout(nextSlide, 5000); 
             }
-            // Se for vídeo, o 'video.onended' acima cuidará da transição
         }
 
         function nextSlide() {
@@ -760,9 +743,7 @@
             updateGallery();
         }
 
-        // Inicia a galeria
         updateGallery();
-
 
         // Formulário App Script
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxvGXWzpDPVHRoGn-c941eQD6orWRwWaSVD23u-_WldKGizoABnAkgVBamjPQENNnCd/exec';
@@ -775,7 +756,6 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            
             btnSubmit.disabled = true;
             btnSubmit.classList.add('opacity-75', 'cursor-not-allowed');
             btnText.textContent = 'Enviando...';
@@ -803,6 +783,11 @@
         });
 
         // Intersection Observer para animação ao rolar
+        // OTIMIZAÇÃO: Timeout de segurança para forçar exibição se o JS falhar ou demorar
+        setTimeout(() => {
+             document.querySelectorAll('.reveal-on-scroll').forEach((el) => el.classList.add('reveal-visible'));
+        }, 2000); // Se em 2s não aparecer, força aparecer.
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
