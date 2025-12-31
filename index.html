@@ -1,4 +1,3 @@
- 
 <!DOCTYPE html>
 <html lang="pt-BR" class="scroll-smooth">
 <head>
@@ -53,12 +52,6 @@
                         sans: ['Inter', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
                     },
-                    backgroundImage: {
-                        'grid-pattern': "linear-gradient(to right, #202020 1px, transparent 1px), linear-gradient(to bottom, #202020 1px, transparent 1px)",
-                    },
-                    backgroundSize: {
-                        'grid-size': '40px 40px',
-                    },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'float-cycle': 'floatCycle 14s ease-in-out infinite',
@@ -111,10 +104,12 @@
             -webkit-text-fill-color: transparent;
         }
 
+        /* --- UPDATE: Grid estilo Blueprint (Planta Técnica) --- */
         .bg-grid {
             background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            /* Linhas cinzas finas e sutis */
+            background-image: linear-gradient(to right, rgba(128, 128, 128, 0.08) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(128, 128, 128, 0.08) 1px, transparent 1px);
         }
 
         input:not(:placeholder-shown) {
@@ -134,6 +129,13 @@
             transform: translateY(0);
         }
 
+        /* --- UPDATE: Máscara para imagem do Hero desaparecer na esquerda --- */
+        .hero-image-mask {
+            /* O gradiente vai da esquerda (transparente) para a direita (opaco) */
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 50%, black 100%);
+            mask-image: linear-gradient(to right, transparent 0%, black 50%, black 100%);
+        }
+
         /* --- CARROSSEL MAC WINDOW STYLE --- */
         .carousel-wrapper {
             position: relative;
@@ -148,7 +150,6 @@
         .mac-window {
             position: absolute;
             width: 600px;
-            /* ALTURA FIXA PARA CORTAR TARJAS (Ajuste do vídeo) */
             height: 300px;
             background-color: #1a1a1a;
             border-radius: 12px;
@@ -184,7 +185,6 @@
             background: #000;
         }
 
-        /* Video e Imagem preenchendo e cortando excessos */
         .window-body img,
         .window-body video {
             width: 100%;
@@ -223,7 +223,6 @@
             pointer-events: none;
         }
 
-        /* --- BOLINHAS (INDICADORES) --- */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -251,7 +250,7 @@
         @media (max-width: 768px) {
             .mac-window {
                 width: 320px !important;
-                height: 200px !important; /* Ajuste proporcional mobile */
+                height: 200px !important;
             }
             .carousel-wrapper {
                 height: 320px;
@@ -310,11 +309,11 @@
                 </h1>
                 
                 <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg border-l-2 border-brand-orange pl-6">
-                    Soluções digitais focadas em <span class="text-white font-bold">posicionamento</span>, <span class="text-white font-bold">conversão</span> e <span class="text-white font-bold">escalabilidade</span> para o crescimento do seu negócio.
+                    Construo landing pages e sites institucionais focados em <span class="text-white font-bold">posicionamento no Google</span>, <span class="text-white font-bold">clareza na comunicação</span> e <span class="text-white font-bold">conversão de clientes</span>.
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#orcamento" class="bg-brand-orange text-black px-8 py-3 rounded-sm font-bold text-base hover:bg-white hover:text-brand-orange transition-all duration-300 uppercase tracking-wide">
+                    <a href="#orcamento" class="bg-brand-orange text-black px-8 py-3 rounded-sm font-bold text-base hover:bg-white hover:text-brand-orange transition-all duration-300 uppercase tracking-wide hover:scale-105 hover:shadow-[0_0_20px_rgba(255,85,0,0.4)]">
                         Ver Planos
                     </a>
                 </div>
@@ -322,10 +321,8 @@
         </div>
 
         <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
-            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
-            <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-black z-10"></div>
-
+            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale hero-image-mask z-0">
+            
             <div class="tech-card absolute right-6 md:right-12 top-24 p-5 rounded-lg max-w-[240px] z-20 animate-float-cycle flex items-center gap-3">
                 <div class="bg-brand-orange/10 p-2 rounded text-brand-orange border border-brand-orange/20">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -395,7 +392,7 @@
     <section id="solucoes" class="py-24 px-6 bg-brand-black">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-3xl font-bold mb-8 reveal-on-scroll font-display">Tecnologia e Resultado</h2>
-            <p class="text-gray-400 text-lg mb-16 leading-relaxed max-w-4xl mx-auto reveal-on-scroll">Desenvolvemos websites funcionais e sem burocracia, com foco no RS, SC e PR.</p>
+            <p class="text-gray-400 text-lg mb-16 leading-relaxed max-w-4xl mx-auto reveal-on-scroll">Desenvolvo websites funcionais e otimizados, com foco no RS, SC e PR.</p>
             <div class="grid md:grid-cols-3 gap-8 text-left">
                 <div class="p-8 rounded-lg bg-brand-surface border border-white/5 hover:border-brand-orange transition duration-300 group reveal-on-scroll hover:shadow-[0_0_20px_rgba(255,85,0,0.15)]">
                     <div class="w-12 h-12 bg-white/5 rounded-md flex items-center justify-center mb-6 group-hover:bg-brand-orange group-hover:text-black transition-colors duration-300 text-brand-orange border border-white/10">
@@ -427,12 +424,12 @@
     <section id="portfolio" class="py-24 bg-brand-gray bg-grid relative overflow-hidden border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
             
-            <div class="mb-12 reveal-on-scroll">
+            <div class="mb-2 reveal-on-scroll">
                 <h2 class="text-3xl md:text-4xl font-extrabold mb-4 font-display text-white">
-                    Projetos que geram <span class="text-brand-orange">resultado real</span>.
+                    Meus Projetos
                 </h2>
-                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-                    Conheça alguns dos projetos desenvolvidos estrategicamente para nossos parceiros.
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto md:mt-2">
+                    Projetos construídos com HTML, CSS e JavaScript, unindo design refinado e alta performance.
                 </p>
             </div>
 
@@ -536,7 +533,7 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Landing%20Page" target="_blank" class="w-full block text-center border border-white/20 text-white font-bold py-4 rounded-sm hover:bg-white hover:text-black transition duration-300 uppercase tracking-widest text-sm">Selecionar Plano</a>
+                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Landing%20Page" target="_blank" class="w-full block text-center border border-white/20 text-white font-bold py-4 rounded-sm hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm hover:scale-105 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]">Selecionar Plano</a>
                 </div>
 
                 <div class="bg-brand-black border border-brand-orange rounded-lg p-8 flex flex-col relative shadow-[0_0_40px_-10px_rgba(255,85,0,0.2)] reveal-on-scroll scale-105 z-10" style="transition-delay: 200ms;">
@@ -556,17 +553,50 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Site%20Institucional" target="_blank" class="w-full block text-center bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white hover:text-black transition duration-300 uppercase tracking-widest text-sm">Quero este Plano</a>
+                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Site%20Institucional" target="_blank" class="w-full block text-center bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm hover:scale-105 hover:shadow-[0_0_20px_rgba(255,85,0,0.4)]">Quero este Plano</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <section id="sobre" class="py-24 bg-brand-black relative overflow-hidden border-t border-white/5 bg-grid">
+        <div class="max-w-5xl mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                
+                <div class="w-full md:w-2/3 reveal-on-scroll">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-6 font-display text-white">
+                        Sobre Mim
+                    </h2>
+                    <div class="space-y-4 text-gray-400 text-lg leading-relaxed text-justify">
+                        <p>
+                            <strong class="text-white">Me chamo Daniel Tavares,</strong> tenho experiência com marketing e web design, atuando por cinco anos como freelancer na criação de peças gráficas e projetos de&nbsp;design.
+                        </p>
+                        <p>
+                            Devido à minha paixão por criação, escolhi trabalhar com profissionais e prestadores de serviços que buscam inserção e melhor&nbsp;posicionamento no mercado, criando landing pages e sites institucionais responsivos, bonitos e com boa&nbsp;estrutura.
+                        </p>
+                        <p>
+                            Trabalho de forma próxima ao cliente em todas as etapas, da primeira conversa até a entrega final, garantindo um processo claro e&nbsp;organizado, com um site alinhado às necessidades e objetivos do&nbsp;projeto.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/3 flex justify-center reveal-on-scroll" style="transition-delay: 200ms;">
+                      <div class="relative group">
+                        <div class="absolute -inset-4 bg-brand-orange/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
+                        <div class="relative w-64 h-64 rounded-2xl overflow-hidden border-2 border-white/10 group-hover:border-brand-orange/50 transition-all duration-500 shadow-2xl ring-1 ring-white/5 group-hover:ring-brand-orange/30 hover:scale-105">
+                            <img src="daniel.png" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
     <section id="contato-form" class="py-24 bg-black relative border-t border-white/5 reveal-on-scroll">
         <div class="max-w-4xl mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold mb-4 text-white font-display">Vamos Conversar?</h2>
-                <p class="text-gray-400">Preencha o formulário abaixo e entraremos em contato.</p>
+                <p class="text-gray-400">Preencha o formulário abaixo ou fale comigo pelo whatsapp.</p>
             </div>
             <div class="bg-brand-gray/30 p-8 rounded-lg border border-white/5 shadow-2xl backdrop-blur-sm">
                 <form id="contactForm" class="space-y-6">
@@ -590,7 +620,7 @@
                             <input type="text" name="cidade" id="cidade" required class="w-full bg-brand-black border border-white/10 rounded-sm px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition" placeholder="Sua cidade">
                         </div>
                     </div>
-                    <button type="submit" id="submitBtn" class="w-full bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white transition duration-300 shadow-lg shadow-brand-orange/20 flex justify-center items-center gap-2 uppercase tracking-widest text-sm">
+                    <button type="submit" id="submitBtn" class="w-full bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white transition-all duration-300 shadow-lg shadow-brand-orange/20 flex justify-center items-center gap-2 uppercase tracking-widest text-sm hover:scale-105 hover:shadow-[0_0_20px_rgba(255,85,0,0.4)]">
                         <span>Enviar Solicitação</span>
                         <svg id="loadingIcon" class="animate-spin h-5 w-5 text-black hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
@@ -607,7 +637,7 @@
                     <a href="#" class="inline-block hover:opacity-80 transition">
                         <img src="Dan.svg" alt="Studio Dan Logo" class="h-14 w-auto logo-white-filter block object-contain object-left -mt-2 grayscale hover:grayscale-0 transition duration-300">
                     </a>
-                    <p class="text-gray-500 text-sm leading-relaxed max-w-sm block">Criação de Landing Pages e Sites Institucionais focados em autoridade e conversão.</p>
+                    <p class="text-gray-500 text-sm leading-relaxed max-w-sm block mt-6">Criação de Landing Pages e Sites Institucionais focados em autoridade e conversão.</p>
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-6 mt-2 font-display">Serviços</h4>
@@ -784,4 +814,3 @@
 
 </body>
 </html>
-
