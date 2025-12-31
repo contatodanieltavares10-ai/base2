@@ -11,15 +11,10 @@
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
     
     <script>
+        // Otimização de Scroll imediata
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
-        window.addEventListener('load', function() {
-            if (!window.location.hash) {
-                window.scrollTo(0, 0);
-                setTimeout(function() { window.scrollTo(0, 0); }, 10);
-            }
-        });
     </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -87,51 +82,42 @@
         }
     </script>
     <style>
-        .logo-white-filter {
-            filter: brightness(0) invert(1);
-        }
-
+        /* Otimizações de renderização */
+        .logo-white-filter { filter: brightness(0) invert(1); }
         .tech-card {
             background: #0F0F0F;
             border: 1px solid #333;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
             transition: all 0.3s ease;
+            will-change: transform, box-shadow; /* Dica para o navegador */
         }
-        
         .tech-card:hover {
             border-color: #FF5500;
             box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
             transform: translateY(-2px);
         }
-
         .hero-text-gradient {
             background: linear-gradient(to right, #FF5500, #FFA500);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .bg-grid {
             background-size: 40px 40px;
             background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
                               linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
-
         input:not(:placeholder-shown) {
             background-color: #1A1A1A !important;
             color: white !important;
             border-color: #FF5500 !important;
         }
-
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px); 
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
             will-change: opacity, transform;
         }
-        .reveal-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .reveal-visible { opacity: 1; transform: translateY(0); }
 
         /* --- CARROSSEL MAC WINDOW STYLE --- */
         .carousel-wrapper {
@@ -143,11 +129,9 @@
             align-items: center;
             perspective: 1200px;
         }
-
         .mac-window {
             position: absolute;
             width: 600px;
-            /* ALTURA FIXA PARA CORTAR TARJAS (Ajuste do vídeo) */
             height: 300px;
             background-color: #1a1a1a;
             border-radius: 12px;
@@ -157,8 +141,8 @@
             transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex;
             flex-direction: column;
+            will-change: transform, opacity;
         }
-
         .window-bar {
             height: 32px;
             background: #252525;
@@ -170,7 +154,6 @@
             flex-shrink: 0;
             z-index: 10;
         }
-
         .win-btn { width: 12px; height: 12px; border-radius: 50%; }
         .btn-close { background-color: #ff5f56; }
         .btn-min { background-color: #ffbd2e; }
@@ -182,17 +165,13 @@
             overflow: hidden;
             background: #000;
         }
-
-        /* Video e Imagem preenchendo e cortando excessos */
-        .window-body img,
-        .window-body video {
+        .window-body img, .window-body video {
             width: 100%;
             height: 100%;
             object-fit: cover;
             object-position: top;
             display: block;
         }
-
         .mac-window.active {
             z-index: 30;
             transform: translateX(0) scale(1);
@@ -200,21 +179,18 @@
             filter: blur(0);
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
         }
-
         .mac-window.prev {
             z-index: 10;
             transform: translateX(-60%) scale(0.8) rotateY(15deg);
             opacity: 0.5;
             filter: blur(2px);
         }
-
         .mac-window.next {
             z-index: 10;
             transform: translateX(60%) scale(0.8) rotateY(-15deg);
             opacity: 0.5;
             filter: blur(2px);
         }
-
         .mac-window.hidden-item {
             z-index: 0;
             transform: scale(0);
@@ -231,7 +207,6 @@
             position: relative;
             z-index: 40;
         }
-
         .dot {
             width: 10px;
             height: 10px;
@@ -240,7 +215,6 @@
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
         .dot.active {
             background-color: #FF5500;
             transform: scale(1.3);
@@ -250,7 +224,7 @@
         @media (max-width: 768px) {
             .mac-window {
                 width: 320px !important;
-                height: 200px !important; /* Ajuste proporcional mobile */
+                height: 200px !important;
             }
             .carousel-wrapper {
                 height: 320px;
@@ -264,7 +238,7 @@
         <div class="max-w-7xl mx-auto pl-8 pr-6 md:pl-20 md:pr-8 h-24 flex items-center justify-between relative">
             
             <a href="#" class="flex-shrink-0 cursor-pointer hover:opacity-80 transition flex items-center h-full relative z-50">
-                <img src="Dan.svg" alt="Dan Logo" class="h-14 w-auto logo-white-filter object-contain">
+                <img src="Dan.svg" alt="Dan Logo" width="56" height="56" class="h-14 w-auto logo-white-filter object-contain">
             </a>
 
             <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-gray-400 ml-auto mr-8 uppercase font-display">
@@ -309,7 +283,7 @@
                 </h1>
                 
                 <p class="text-gray-400 text-base md:text-lg leading-relaxed mb-8 max-w-lg border-l-2 border-brand-orange pl-6">
-                    Crio landing pages e sites institucionais focados em <span class="text-white font-bold">posicionamento no Google</span>, <span class="text-white font-bold">clareza na comunicação</span> e <span class="text-white font-bold">conversão de clientes</span>.
+                    Construo landing pages e sites institucionais focados em <span class="text-white font-bold">posicionamento no Google</span>, <span class="text-white font-bold">clareza na comunicação</span> e <span class="text-white font-bold">conversão de clientes</span>.
                 </p>
 
                 <div class="flex flex-wrap gap-4">
@@ -321,7 +295,7 @@
         </div>
 
         <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
-            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
+            <img src="IMG.jpg" alt="Imagem Hero" fetchpriority="high" loading="eager" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
             <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
             <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-black z-10"></div>
 
@@ -445,7 +419,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -459,7 +433,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume2.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -473,7 +447,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume3.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -487,7 +461,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume4.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -571,10 +545,10 @@
                     </h2>
                     <div class="space-y-4 text-gray-400 text-lg leading-relaxed text-justify">
                         <p>
-                            <strong class="text-white">Me chamo Daniel Tavares.</strong> Tenho experiência com marketing e web design e atuei por cinco anos como freelancer na criação de peças gráficas e projetos de&nbsp;design.
+                            <strong class="text-white">Me chamo Daniel Tavares,</strong> tenho experiência com marketing e web design, atuando por cinco anos como freelancer na criação de peças gráficas e projetos de&nbsp;design.
                         </p>
                         <p>
-                            Devido à minha paixão pela criação, escolhi trabalhar com profissionais e prestadores de serviços que buscam inserção e melhor&nbsp;posicionamento no mercado, criando landing pages e sites institucionais <span class="text-white font-bold">responsivos, bonitos e com boa&nbsp;estrutura</span>.
+                            Devido à minha paixão por criação, escolhi trabalhar com profissionais e prestadores de serviços que buscam inserção e melhor&nbsp;posicionamento no mercado, criando landing pages e sites institucionais <span class="text-white font-bold">responsivos, bonitos e com boa&nbsp;estrutura</span>.
                         </p>
                         <p>
                             Trabalho de forma próxima ao cliente em todas as etapas, da primeira conversa até a entrega final, garantindo um processo claro e&nbsp;organizado, com um site alinhado às necessidades e objetivos do&nbsp;projeto.
@@ -586,7 +560,7 @@
                       <div class="relative group">
                         <div class="absolute -inset-4 bg-brand-orange/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                         <div class="relative w-64 h-64 rounded-2xl overflow-hidden border-2 border-white/10 group-hover:border-brand-orange/50 transition-all duration-500 shadow-2xl ring-1 ring-white/5 group-hover:ring-brand-orange/30 hover:scale-105">
-                            <img src="daniel.png" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                            <img src="daniel.png" alt="Daniel Tavares" loading="lazy" decoding="async" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
                         </div>
                     </div>
                 </div>
@@ -637,7 +611,7 @@
             <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 mb-16 items-start">
                 <div>
                     <a href="#" class="inline-block hover:opacity-80 transition">
-                        <img src="Dan.svg" alt="Studio Dan Logo" class="h-14 w-auto logo-white-filter block object-contain object-left -mt-2 grayscale hover:grayscale-0 transition duration-300">
+                        <img src="Dan.svg" alt="Studio Dan Logo" loading="lazy" decoding="async" class="h-14 w-auto logo-white-filter block object-contain object-left -mt-2 grayscale hover:grayscale-0 transition duration-300">
                     </a>
                     <p class="text-gray-500 text-sm leading-relaxed max-w-sm block mt-6">Criação de Landing Pages e Sites Institucionais focados em autoridade e conversão.</p>
                 </div>
@@ -698,14 +672,11 @@
         let timer;
 
         function updateGallery() {
-            // Limpa timer anterior para evitar conflitos
             if(timer) clearTimeout(timer);
 
             galleryItems.forEach((item, index) => {
-                // Remove classes antigas
                 item.classList.remove('active', 'prev', 'next', 'hidden-item');
                 
-                // Lógica de posicionamento (CSS)
                 if (index === activeIndex) {
                     item.classList.add('active');
                 } else if (index === (activeIndex - 1 + galleryItems.length) % galleryItems.length) {
@@ -716,25 +687,24 @@
                     item.classList.add('hidden-item');
                 }
 
-                // Lógica do Vídeo (Play/Pause/Reset)
                 const video = item.querySelector('video');
                 if (video) {
                     if (index === activeIndex) {
-                        video.currentTime = 0; // Reinicia o vídeo
-                        video.play().catch(e => console.log("Auto-play prevented"));
-                        video.loop = false; // Garante que não está em loop
-                        // Quando o vídeo acabar, chama o próximo slide
-                        video.onended = () => {
-                            nextSlide();
-                        };
+                        video.currentTime = 0; 
+                        // Promise para evitar erros de play automático
+                        var playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(_ => {}).catch(error => { console.log("Auto-play prevented"); });
+                        }
+                        video.loop = false;
+                        video.onended = () => { nextSlide(); };
                     } else {
                         video.pause();
-                        video.onended = null; // Remove o listener quando não está ativo
+                        video.onended = null;
                     }
                 }
             });
 
-            // Atualiza as bolinhas
             if(dots.length > 0) {
                 dots.forEach((dot, index) => {
                     if (index === activeIndex) {
@@ -745,14 +715,12 @@
                 });
             }
 
-            // Lógica do Timer: Só ativa o setTimeout se o slide ATUAL NÃO for um vídeo
             const currentItem = galleryItems[activeIndex];
             const currentVideo = currentItem.querySelector('video');
 
             if (!currentVideo) {
-                timer = setTimeout(nextSlide, 5000); // 5 segundos para imagens
+                timer = setTimeout(nextSlide, 5000); 
             }
-            // Se for vídeo, o 'video.onended' acima cuidará da transição
         }
 
         function nextSlide() {
@@ -760,13 +728,10 @@
             updateGallery();
         }
 
-        // Inicia a galeria
         updateGallery();
 
-
-        // Formulário App Script
+        // Formulário
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxvGXWzpDPVHRoGn-c941eQD6orWRwWaSVD23u-_WldKGizoABnAkgVBamjPQENNnCd/exec';
-        
         const form = document.forms['contactForm'];
         const btnSubmit = document.getElementById('submitBtn');
         const btnText = btnSubmit.querySelector('span');
@@ -775,7 +740,6 @@
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            
             btnSubmit.disabled = true;
             btnSubmit.classList.add('opacity-75', 'cursor-not-allowed');
             btnText.textContent = 'Enviando...';
@@ -802,17 +766,17 @@
                 });
         });
 
-        // Intersection Observer para animação ao rolar
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('reveal-visible');
+                    // Desconecta após revelar para economizar recurso
+                    observer.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
     </script>
-
 </body>
 </html>
