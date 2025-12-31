@@ -4,32 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studio Dan | Criação de Sites em Porto Alegre, SC e PR</title>
-    <meta name="description" content="Criação de sites institucionais em Porto Alegre e Região Sul.">
+    <meta name="description" content="Criação de sites institucionais de alta performance em Porto Alegre e Região Sul.">
+    <meta name="theme-color" content="#050505">
     
     <link rel="icon" href="favicon.png" type="image/png">
-    <link rel="shortcut icon" href="favicon.png" type="image/png">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-    
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.addEventListener('load', function() {
-            if (!window.location.hash) {
-                window.scrollTo(0, 0);
-                setTimeout(function() { window.scrollTo(0, 0); }, 10);
-            }
-        });
-    </script>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" as="image" href="IMG.jpg">
+
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.tailwindcss.com"></script>
+    
     <script>
+        // Configuração Tailwind
         tailwind.config = {
             theme: {
                 extend: {
@@ -41,11 +32,6 @@
                             surface: '#1E1E1E', 
                             whatsapp: '#25D366',
                             whatsappHover: '#128C7E'
-                        },
-                        orange: {
-                            500: '#FF5500', 
-                            600: '#E04800', 
-                            700: '#B83A00', 
                         }
                     },
                     fontFamily: {
@@ -54,19 +40,12 @@
                     },
                     backgroundImage: {
                         'grid-pattern': "linear-gradient(to right, #202020 1px, transparent 1px), linear-gradient(to bottom, #202020 1px, transparent 1px)",
-                        // NOVA IMAGEM DE FUNDO ADICIONADA
-                        'custom-grid': "url('image_0.png')",
-                    },
-                    backgroundSize: {
-                        'grid-size': '40px 40px',
-                        'custom-grid-size': 'auto', // Ajuste o tamanho conforme necessário
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'float-cycle': 'floatCycle 14s ease-in-out infinite',
                         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        // 'subtle-zoom' REMOVIDO
                     },
                     keyframes: {
                         float: {
@@ -84,23 +63,36 @@
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        // 'subtleZoom' KEYFRAME REMOVIDO
+                        }
                     }
                 }
             }
         }
+        
+        // Scroll Restoration Imediato
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
     </script>
+
     <style>
+        /* Otimizações de Performance CSS */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
         .logo-white-filter {
             filter: brightness(0) invert(1);
         }
 
+        /* Classes Utilitárias Customizadas */
         .tech-card {
             background: #0F0F0F;
             border: 1px solid #333;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            /* GPU Acceleration */
+            will-change: transform; 
         }
         
         .tech-card:hover {
@@ -115,16 +107,11 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* .bg-grid REMOVIDO - Agora usamos bg-custom-grid */
-        .bg-custom-grid {
-            background-image: url('image_0.png');
-            background-repeat: repeat;
-            background-size: auto;
-            /* Pode adicionar um background-blend-mode se quiser misturar com a cor de fundo */
-            /* background-blend-mode: overlay; */
-            background-color: #050505; /* Cor de fundo para garantir contraste */
+        .bg-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
         }
-
 
         input:not(:placeholder-shown) {
             background-color: #1A1A1A !important;
@@ -132,11 +119,12 @@
             border-color: #FF5500 !important;
         }
 
+        /* Reveal Animation Otimizada */
         .reveal-on-scroll {
             opacity: 0;
             transform: translateY(30px); 
             transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, transform;
+            will-change: opacity, transform; /* Importante para performance */
         }
         .reveal-visible {
             opacity: 1;
@@ -152,12 +140,13 @@
             justify-content: center;
             align-items: center;
             perspective: 1200px;
+            /* Evita recálculos de layout pesados */
+            contain: layout paint; 
         }
 
         .mac-window {
             position: absolute;
             width: 600px;
-            /* ALTURA FIXA PARA CORTAR TARJAS (Ajuste do vídeo) */
             height: 300px;
             background-color: #1a1a1a;
             border-radius: 12px;
@@ -167,6 +156,8 @@
             transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
             display: flex;
             flex-direction: column;
+            will-change: transform, opacity, filter; /* GPU Force */
+            backface-visibility: hidden; /* Melhora renderização 3D */
         }
 
         .window-bar {
@@ -193,7 +184,6 @@
             background: #000;
         }
 
-        /* Video e Imagem preenchendo e cortando excessos */
         .window-body img,
         .window-body video {
             width: 100%;
@@ -205,7 +195,7 @@
 
         .mac-window.active {
             z-index: 30;
-            transform: translateX(0) scale(1);
+            transform: translateX(0) scale(1) translateZ(0); /* translateZ ativa GPU */
             opacity: 1;
             filter: blur(0);
             box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
@@ -213,21 +203,21 @@
 
         .mac-window.prev {
             z-index: 10;
-            transform: translateX(-60%) scale(0.8) rotateY(15deg);
+            transform: translateX(-60%) scale(0.8) rotateY(15deg) translateZ(0);
             opacity: 0.5;
             filter: blur(2px);
         }
 
         .mac-window.next {
             z-index: 10;
-            transform: translateX(60%) scale(0.8) rotateY(-15deg);
+            transform: translateX(60%) scale(0.8) rotateY(-15deg) translateZ(0);
             opacity: 0.5;
             filter: blur(2px);
         }
 
         .mac-window.hidden-item {
             z-index: 0;
-            transform: scale(0);
+            transform: scale(0) translateZ(0);
             opacity: 0;
             pointer-events: none;
         }
@@ -260,7 +250,7 @@
         @media (max-width: 768px) {
             .mac-window {
                 width: 320px !important;
-                height: 200px !important; /* Ajuste proporcional mobile */
+                height: 200px !important;
             }
             .carousel-wrapper {
                 height: 320px;
@@ -270,11 +260,11 @@
 </head>
 <body class="bg-brand-black text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-orange selection:text-white">
 
-    <nav class="absolute w-full z-50 bg-brand-black border-b border-white/5 top-0 transition-all">
+    <nav class="absolute w-full z-50 bg-brand-black/90 backdrop-blur-md border-b border-white/5 top-0 transition-all">
         <div class="max-w-7xl mx-auto pl-8 pr-6 md:pl-20 md:pr-8 h-24 flex items-center justify-between relative">
             
             <a href="#" class="flex-shrink-0 cursor-pointer hover:opacity-80 transition flex items-center h-full relative z-50">
-                <img src="Dan.svg" alt="Dan Logo" class="h-14 w-auto logo-white-filter object-contain">
+                <img src="Dan.svg" alt="Dan Logo" class="h-14 w-auto logo-white-filter object-contain" width="56" height="56">
             </a>
 
             <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-gray-400 ml-auto mr-8 uppercase font-display">
@@ -297,7 +287,7 @@
             </div>
         </div>
 
-        <div id="mobile-menu" class="md:hidden absolute top-24 left-0 w-full bg-[#0A0A0A] border-t border-white/10 shadow-2xl opacity-0 invisible -translate-y-4 transition-all duration-300 ease-in-out origin-top z-40">
+        <div id="mobile-menu" class="md:hidden absolute top-24 left-0 w-full bg-[#0A0A0A]/95 backdrop-blur-lg border-t border-white/10 shadow-2xl opacity-0 invisible -translate-y-4 transition-all duration-300 ease-in-out origin-top z-40">
             <div class="flex flex-col p-6 gap-6 text-center">
                 <a href="#diferenca" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-bold uppercase tracking-widest transition duration-300 py-2 border-b border-white/5">Vantagens</a>
                 <a href="#solucoes" class="mobile-link text-lg text-gray-300 hover:text-brand-orange font-bold uppercase tracking-widest transition duration-300 py-2 border-b border-white/5">Soluções</a>
@@ -308,7 +298,7 @@
         </div>
     </nav>
 
-    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-[110vh] pt-24 overflow-hidden bg-brand-black bg-custom-grid">
+    <header class="relative w-full flex flex-col-reverse lg:flex-row min-h-[110vh] pt-24 overflow-hidden bg-brand-black bg-grid">
         <div class="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:pl-20 py-12 lg:py-0 z-10">
             <div class="animate-fade-in-up">
                 <h1 class="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight mb-6 font-display tracking-tight">
@@ -323,7 +313,7 @@
                 </p>
 
                 <div class="flex flex-wrap gap-4">
-                    <a href="#orcamento" class="bg-brand-orange text-black px-8 py-3 rounded-sm font-bold text-base transition-all duration-300 uppercase tracking-wide hover:bg-white hover:text-brand-orange">
+                    <a href="#orcamento" class="bg-brand-orange text-black px-8 py-3 rounded-sm font-bold text-base hover:bg-white hover:text-brand-orange transition-all duration-300 uppercase tracking-wide shadow-lg shadow-brand-orange/20">
                         Ver Planos
                     </a>
                 </div>
@@ -331,11 +321,11 @@
         </div>
 
         <div class="w-full lg:w-1/2 relative min-h-[500px] lg:min-h-full overflow-hidden">
-            <img src="IMG.jpg" alt="Imagem Hero" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75Contrast-125">
+            <img src="IMG.jpg" fetchpriority="high" alt="Criação de Sites Porto Alegre" class="absolute inset-0 w-full h-full object-cover grayscale brightness-75 contrast-125">
             <div class="absolute inset-0 bg-gradient-to-t from-brand-black via-[#FF5500]/20 to-transparent mix-blend-overlay z-10"></div>
             <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-black z-10"></div>
 
-            <div class="tech-card absolute right-6 md:right-12 top-24 p-5 rounded-lg max-w-[240px] z-20 animate-float-cycle flex items-center gap-3">
+            <div class="tech-card absolute right-6 md:right-12 top-24 p-5 rounded-lg max-w-[240px] z-20 animate-float-cycle flex items-center gap-3 bg-black/80 backdrop-blur-sm">
                 <div class="bg-brand-orange/10 p-2 rounded text-brand-orange border border-brand-orange/20">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
@@ -345,7 +335,7 @@
                 </div>
             </div>
 
-            <div class="tech-card absolute left-6 md:left-12 bottom-24 p-5 rounded-lg max-w-[280px] z-20 animate-float-cycle flex items-start gap-3">
+            <div class="tech-card absolute left-6 md:left-12 bottom-24 p-5 rounded-lg max-w-[280px] z-20 animate-float-cycle flex items-start gap-3 bg-black/80 backdrop-blur-sm">
                 <div class="bg-brand-orange/10 p-2 rounded text-brand-orange border border-brand-orange/20 mt-1">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                 </div>
@@ -357,7 +347,7 @@
         </div>
     </header>
 
-    <section id="diferenca" class="py-24 relative overflow-hidden bg-brand-gray bg-custom-grid border-y border-white/5">
+    <section id="diferenca" class="py-24 relative overflow-hidden bg-brand-gray bg-grid border-y border-white/5">
         <div class="max-w-6xl mx-auto px-6 relative z-10">
             <div class="text-center mb-16 reveal-on-scroll">
                 <h2 class="text-3xl font-bold mb-4 font-display text-white">A Evolução da sua Presença Digital</h2>
@@ -433,7 +423,7 @@
         </div>
     </section>
 
-    <section id="portfolio" class="py-24 bg-brand-gray bg-custom-grid relative overflow-hidden border-t border-white/5">
+    <section id="portfolio" class="py-24 bg-brand-gray bg-grid relative overflow-hidden border-t border-white/5">
         <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
             
             <div class="mb-2 reveal-on-scroll">
@@ -455,7 +445,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -469,7 +459,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume2.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -483,7 +473,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="auto" class="w-full h-full object-cover object-top">
                                 <source src="volume3.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -497,7 +487,7 @@
                             <div class="win-btn btn-max"></div>
                         </div>
                         <div class="window-body">
-                            <video muted playsinline class="w-full h-full object-cover object-top">
+                            <video muted playsinline preload="metadata" class="w-full h-full object-cover object-top">
                                 <source src="volume4.mp4" type="video/mp4">
                                 Seu navegador não suporta vídeos.
                             </video>
@@ -565,13 +555,13 @@
                             </ul>
                         </div>
                     </div>
-                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Site%20Institucional" target="_blank" class="w-full block text-center bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white hover:text-brand-orange transition duration-300 uppercase tracking-widest text-sm">Quero este Plano</a>
+                    <a href="https://wa.me/seunumero?text=Tenho%20interesse%20no%20Plano%20Site%20Institucional" target="_blank" class="w-full block text-center bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white hover:text-black transition duration-300 uppercase tracking-widest text-sm">Quero este Plano</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="sobre" class="py-24 bg-brand-black relative overflow-hidden border-t border-white/5 bg-custom-grid">
+    <section id="sobre" class="py-24 bg-brand-black relative overflow-hidden border-t border-white/5 bg-grid">
         <div class="max-w-5xl mx-auto px-6 relative z-10">
             <div class="flex flex-col md:flex-row gap-12 items-center">
                 
@@ -596,7 +586,7 @@
                       <div class="relative group">
                         <div class="absolute -inset-4 bg-brand-orange/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
                         <div class="relative w-64 h-64 rounded-2xl overflow-hidden border-2 border-white/10 group-hover:border-brand-orange/50 transition-all duration-500 shadow-2xl ring-1 ring-white/5 group-hover:ring-brand-orange/30 hover:scale-105">
-                            <img src="daniel.png" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                            <img src="daniel.png" loading="lazy" alt="Daniel Tavares" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
                         </div>
                     </div>
                 </div>
@@ -632,7 +622,7 @@
                             <input type="text" name="cidade" id="cidade" required class="w-full bg-brand-black border border-white/10 rounded-sm px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange transition" placeholder="Sua cidade">
                         </div>
                     </div>
-                    <button type="submit" id="submitBtn" class="w-full bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white hover:text-brand-orange transition duration-300 flex justify-center items-center gap-2 uppercase tracking-widest text-sm">
+                    <button type="submit" id="submitBtn" class="w-full bg-brand-orange text-black font-bold py-4 rounded-sm hover:bg-white transition duration-300 shadow-lg shadow-brand-orange/20 flex justify-center items-center gap-2 uppercase tracking-widest text-sm">
                         <span>Enviar Solicitação</span>
                         <svg id="loadingIcon" class="animate-spin h-5 w-5 text-black hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
                     </button>
@@ -647,7 +637,7 @@
             <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-8 mb-16 items-start">
                 <div>
                     <a href="#" class="inline-block hover:opacity-80 transition">
-                        <img src="Dan.svg" alt="Studio Dan Logo" class="h-14 w-auto logo-white-filter block object-contain object-left -mt-2 grayscale hover:grayscale-0 transition duration-300">
+                        <img src="Dan.svg" alt="Studio Dan Logo" loading="lazy" class="h-14 w-auto logo-white-filter block object-contain object-left -mt-2 grayscale hover:grayscale-0 transition duration-300">
                     </a>
                     <p class="text-gray-500 text-sm leading-relaxed max-w-sm block mt-6">Criação de Landing Pages e Sites Institucionais focados em autoridade e conversão.</p>
                 </div>
@@ -708,14 +698,11 @@
         let timer;
 
         function updateGallery() {
-            // Limpa timer anterior para evitar conflitos
             if(timer) clearTimeout(timer);
 
             galleryItems.forEach((item, index) => {
-                // Remove classes antigas
                 item.classList.remove('active', 'prev', 'next', 'hidden-item');
                 
-                // Lógica de posicionamento (CSS)
                 if (index === activeIndex) {
                     item.classList.add('active');
                 } else if (index === (activeIndex - 1 + galleryItems.length) % galleryItems.length) {
@@ -726,25 +713,25 @@
                     item.classList.add('hidden-item');
                 }
 
-                // Lógica do Vídeo (Play/Pause/Reset)
                 const video = item.querySelector('video');
                 if (video) {
                     if (index === activeIndex) {
-                        video.currentTime = 0; // Reinicia o vídeo
-                        video.play().catch(e => console.log("Auto-play prevented"));
-                        video.loop = false; // Garante que não está em loop
-                        // Quando o vídeo acabar, chama o próximo slide
+                        video.currentTime = 0;
+                        var playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(_ => {}).catch(error => { console.log("Auto-play prevented"); });
+                        }
+                        video.loop = false;
                         video.onended = () => {
                             nextSlide();
                         };
                     } else {
                         video.pause();
-                        video.onended = null; // Remove o listener quando não está ativo
+                        video.onended = null;
                     }
                 }
             });
 
-            // Atualiza as bolinhas
             if(dots.length > 0) {
                 dots.forEach((dot, index) => {
                     if (index === activeIndex) {
@@ -755,14 +742,12 @@
                 });
             }
 
-            // Lógica do Timer: Só ativa o setTimeout se o slide ATUAL NÃO for um vídeo
             const currentItem = galleryItems[activeIndex];
             const currentVideo = currentItem.querySelector('video');
 
             if (!currentVideo) {
-                timer = setTimeout(nextSlide, 5000); // 5 segundos para imagens
+                timer = setTimeout(nextSlide, 5000); 
             }
-            // Se for vídeo, o 'video.onended' acima cuidará da transição
         }
 
         function nextSlide() {
@@ -770,7 +755,6 @@
             updateGallery();
         }
 
-        // Inicia a galeria
         updateGallery();
 
 
@@ -812,7 +796,6 @@
                 });
         });
 
-        // Intersection Observer para animação ao rolar
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
