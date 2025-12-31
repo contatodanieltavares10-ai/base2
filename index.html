@@ -9,28 +9,16 @@
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="shortcut icon" href="favicon.png" type="image/png">
     <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-    
-    <script>
-        if ('scrollRestoration' in history) {
-            history.scrollRestoration = 'manual';
-        }
-        window.addEventListener('load', function() {
-            if (!window.location.hash) {
-                window.scrollTo(0, 0);
-                setTimeout(function() { window.scrollTo(0, 0); }, 10);
-            }
-        });
-    </script>
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
-
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
@@ -86,54 +74,65 @@
             }
         }
     </script>
-    <style>
-        .logo-white-filter {
-            filter: brightness(0) invert(1);
-        }
 
-        .tech-card {
-            background: #0F0F0F;
-            border: 1px solid #333;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease;
+    <script>
+        // Script de scroll manual para evitar conflitos de cache no Chrome
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('load', function() {
+            if (!window.location.hash) {
+                window.scrollTo(0, 0);
+                setTimeout(function() { window.scrollTo(0, 0); }, 10);
+            }
+        });
+    </script>
+    
+    <style type="text/tailwindcss">
+        /* Diretivas do Tailwind para CSS customizado se necessário */
+        @layer utilities {
+            .logo-white-filter {
+                filter: brightness(0) invert(1);
+            }
+            
+            .tech-card {
+                @apply bg-[#0F0F0F] border border-[#333] shadow-lg transition-all duration-300;
+            }
+            .tech-card:hover {
+                @apply border-brand-orange shadow-[0_0_15px_rgba(255,85,0,0.15)] -translate-y-0.5;
+            }
+
+            .hero-text-gradient {
+                background: linear-gradient(to right, #FF5500, #FFA500);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .bg-grid {
+                background-size: 40px 40px;
+                background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                                  linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            }
+
+            .reveal-on-scroll {
+                opacity: 0;
+                transform: translateY(30px); 
+                transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+                will-change: opacity, transform;
+            }
+            .reveal-visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .tech-card:hover {
-            border-color: #FF5500;
-            box-shadow: 0 0 15px rgba(255, 85, 0, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .hero-text-gradient {
-            background: linear-gradient(to right, #FF5500, #FFA500);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        }
-
+        /* CSS Puro que o Tailwind não cobre bem (Mac Window Style) */
         input:not(:placeholder-shown) {
             background-color: #1A1A1A !important;
             color: white !important;
             border-color: #FF5500 !important;
         }
 
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(30px); 
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            will-change: opacity, transform;
-        }
-        .reveal-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- CARROSSEL MAC WINDOW STYLE --- */
         .carousel-wrapper {
             position: relative;
             width: 100%;
@@ -147,7 +146,6 @@
         .mac-window {
             position: absolute;
             width: 600px;
-            /* ALTURA FIXA PARA CORTAR TARJAS (Ajuste do vídeo) */
             height: 300px;
             background-color: #1a1a1a;
             border-radius: 12px;
@@ -183,7 +181,6 @@
             background: #000;
         }
 
-        /* Video e Imagem preenchendo e cortando excessos */
         .window-body img,
         .window-body video {
             width: 100%;
@@ -222,7 +219,6 @@
             pointer-events: none;
         }
 
-        /* --- BOLINHAS (INDICADORES) --- */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -250,7 +246,7 @@
         @media (max-width: 768px) {
             .mac-window {
                 width: 320px !important;
-                height: 200px !important; /* Ajuste proporcional mobile */
+                height: 200px !important;
             }
             .carousel-wrapper {
                 height: 320px;
@@ -670,11 +666,6 @@
     </a>
 
     <script>
-        if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
-        window.addEventListener('load', function() {
-            if(!window.location.hash) { window.scrollTo(0, 0); setTimeout(function() { window.scrollTo(0, 0); }, 10); }
-        });
-
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
         const links = document.querySelectorAll('.mobile-link');
